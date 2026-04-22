@@ -1,8 +1,8 @@
 import React from 'react';
 import { CoverPage } from './components/pages/CoverPage';
-import { Page2, Page3 } from './components/pages/IntroPages';
-import { Page4, Page5, Page6, Page7 } from './components/pages/DevPages';
-import { Page8, Page9, Page10, Page11 } from './components/pages/FinalPages';
+import { Page2, Page3 } from './components/pages/Pages_2_3';
+import { Page4, Page5 } from './components/pages/Pages_4_5';
+import { Page6, Page7 } from './components/pages/Pages_6_7';
 
 const App: React.FC = () => {
   return (
@@ -14,13 +14,9 @@ const App: React.FC = () => {
       <Page5 />
       <Page6 />
       <Page7 />
-      <Page8 />
-      <Page9 />
-      <Page10 />
-      <Page11 />
-      
+
       <div className="text-gray-600 text-xs mt-10 mb-20">
-        Recreated Structure | Black & Gold Edition
+        RevolutionX STEM Racing — Portfolio Técnico | Black &amp; Gold Edition
       </div>
     </div>
   );
