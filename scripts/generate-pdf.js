@@ -9,12 +9,12 @@ const __dirname = path.dirname(__filename);
     console.log('Launching browser...');
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
+    const appUrl = process.env.PORTFOLIO_URL || 'http://127.0.0.1:3000';
 
     console.log('Navigating to app...');
-    // Assumes the app is running on localhost:3000
-    // Set viewport to A3 at 300 DPI approx width (preset helps with layout)
-    await page.setViewport({ width: 3508, height: 2480, deviceScaleFactor: 2 });
-    await page.goto('http://localhost:3000', { waitUntil: 'networkidle0' });
+    await page.setViewport({ width: 1800, height: 1272, deviceScaleFactor: 2 });
+    await page.emulateMediaType('print');
+    await page.goto(appUrl, { waitUntil: 'networkidle0' });
 
     console.log('Waiting for images to load...');
     await page.evaluate(async () => {
@@ -35,14 +35,14 @@ const __dirname = path.dirname(__filename);
                 size: A3 landscape;
                 margin: 0;
             }
-            body {
-                margin: 0;
-                padding: 0;
-                background-color: #000; /* Ensure bg is black */
-                -webkit-print-color-adjust: exact;
+            html, body, #root, .portfolio-shell {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: #000 !important;
             }
-            #root {
-                width: 100%;
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             .a3-page {
                 break-inside: avoid;
@@ -52,22 +52,24 @@ const __dirname = path.dirname(__filename);
                 margin: 0 !important;
                 box-shadow: none !important;
                 border: none !important;
-                width: 100vw !important;
-                height: 100vh !important;
+                border-radius: 0 !important;
+                width: 420mm !important;
+                min-height: 297mm !important;
+                height: 297mm !important;
                 max-width: none !important;
+                background: #050505 !important;
             }
-            /* Hide the footer text "Recreated Structure..." in print */
-            .text-gray-600.text-xs.mt-10.mb-20 {
+            .a3-page:last-of-type {
+                break-after: auto !important;
+                page-break-after: auto !important;
+            }
+            .no-print {
                 display: none;
             }
-            /* Remove gap between pages in flex container */
-            .flex.flex-col.gap-10 {
+            .portfolio-shell {
+                display: block !important;
                 gap: 0 !important;
-            }
-            /* Remove padding from main container */
-            .py-10 {
-                padding-top: 0 !important;
-                padding-bottom: 0 !important;
+                background: #000 !important;
             }
         `
     });
@@ -77,7 +79,9 @@ const __dirname = path.dirname(__filename);
         path: path.join(__dirname, '../portfolio.pdf'),
         format: 'A3',
         landscape: true,
+        preferCSSPageSize: true,
         printBackground: true,
+        omitBackground: false,
         margin: { top: 0, right: 0, bottom: 0, left: 0 }
     });
 

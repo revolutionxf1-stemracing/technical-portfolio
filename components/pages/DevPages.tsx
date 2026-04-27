@@ -32,11 +32,11 @@ export const Page4: React.FC = () => {
             </ul>
             
             <SectionTitle>Material Selection</SectionTitle>
-            <BodyText>Compared Nylon 12, PEEK, Accura. Selected Ketron PEEK 1000.</BodyText>
+            <BodyText>Selected PLA for the final wheels.</BodyText>
         </div>
         
         <div className="col-span-1">
-            <Table headers={["Material", "Tensile", "Density"]} rows={[["Nylon 12", "46", "1.01"], ["PEEK", "110", "1.31"]]} />
+            <Table headers={["Material", "Use", "Decision"]} rows={[["PLA", "Wheels", "Selected"]]} />
             
             <div className="bg-gold-900/20 border-t-2 border-gold-400 pt-2">
                 <SectionTitle>Designs & Evaluations</SectionTitle>

@@ -208,7 +208,7 @@ export const Page11: React.FC = () => {
                 <div className="col-span-2">
                      <div className="grid grid-cols-2 gap-4">
                          <div>
-                             <SectionTitle>Peek Wheels</SectionTitle>
+                             <SectionTitle>PLA Wheels</SectionTitle>
                              <BodyText>CNC Turned. +/- 0.05mm.</BodyText>
                              <PlaceholderImage label="Wheels" height="h-24" />
                          </div>

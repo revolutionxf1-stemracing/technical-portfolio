@@ -1,137 +1,173 @@
 import React from 'react';
-import { PageContainer, Header, Footer, SectionTitle, BodyText, PlaceholderImage, Table } from '../Shared';
+import { PageContainer, Header, Footer, SectionTitle, BodyText, Table } from '../Shared';
+
+// Photo helpers
+const Photo: React.FC<{ src: string; alt: string; label: string; height?: string; fit?: 'cover' | 'contain' }> = ({ src, alt, label, height = 'h-28', fit = 'cover' }) => (
+  <div className={`w-full ${height} relative mb-2 bg-black-900`}>
+    <img
+      src={src} alt={alt}
+      className={`w-full h-full border border-gray-700 ${fit === 'contain' ? 'object-contain' : 'object-cover'}`}
+      onError={(e) => {
+        const t = e.target as HTMLImageElement;
+        t.style.display = 'none';
+        const fb = t.parentElement?.querySelector('.fb-ph') as HTMLElement;
+        if (fb) fb.style.display = 'flex';
+      }}
+    />
+    <div className="fb-ph absolute inset-0 bg-black-700 border border-dashed border-gold-400/30 items-center justify-center" style={{ display: 'none' }}>
+      <span className="text-gold-400/50 text-[10px] font-mono uppercase text-center p-2">{label}</span>
+    </div>
+  </div>
+);
 
 // =========================================================
-// PÁGINA 4: DESARROLLO AERODINÁMICO Y VALIDACIÓN CFD
+// PÁGINA 4: AERODINÁMICA + CFD + TÚNEL DE VIENTO
 // =========================================================
 export const Page4: React.FC = () => {
   return (
     <PageContainer>
-      <Header title="Desarrollo Aerodinámico y Simulación CFD" pageNumber={4} />
-      <div className="p-5 grid grid-cols-3 gap-5 h-full">
+      <Header title="Aerodinámica: Diseño, Simulación CFD y Validación Experimental" pageNumber={4} />
+      <div className="p-5 grid grid-cols-3 gap-5 h-full items-stretch">
 
-        <div className="col-span-1">
-          <div className="bg-cyan-600 text-white px-2 py-1 font-bold text-[10px] inline-block mb-3">DISEÑO ITERATIVO SIN CFD</div>
+        {/* COL 1 — Diseño iterativo */}
+        <div className="col-span-1 flex flex-col">
+          <div className="bg-cyan-600 text-white px-2 py-1 font-bold text-[11px] inline-block mb-3">DISEÑO ITERATIVO SIN CFD</div>
           <SectionTitle>Optimización por Prueba y Error</SectionTitle>
           <BodyText>
-            La principal característica diferenciadora del proceso de ingeniería del RX_NightBlade
-            es que la totalidad del desarrollo aerodinámico se llevó a cabo sin acceso a herramientas
-            de simulación computacional durante la fase de diseño. A lo largo de múltiples iteraciones,
-            el equipo modeló, imprimió en 3D y evaluó prototipos físicos, ajustando la geometría de
-            la carrocería en función de criterios de ingeniería fundamentados en la mecánica de fluidos
-            teórica: minimización del área frontal, maximización de la continuidad superficial,
-            eliminación de gradientes de presión adversos en la zona trasera y diseño de pontones
-            que aíslen el flujo limpio del turbulento generado por las ruedas. Este enfoque, lejos
-            de ser una limitación, demuestra una comprensión profunda e intuitiva de los principios
-            aerodinámicos, ya que los resultados del CFD —obtenidos solo en la fase final como
-            herramienta de validación— confirmaron la idoneidad de todas las decisiones tomadas.
+            Toda la aerodinámica la diseñamos sin usar CFD. El proceso fue más o menos así:
+            modelábamos una geometría en Fusion 360, la imprimíamos, la comparábamos con versiones
+            anteriores y ajustábamos según lo que sabíamos de mecánica de fluidos: reducir el área
+            frontal, mantener la continuidad de la superficie, evitar cambios bruscos de presión en
+            la parte trasera y separar el flujo limpio de la turbulencia de las ruedas con los
+            pontones. Cuando por fin simulamos en SimScale, lo usamos como una revisión del diseño,
+            no como una prueba perfecta de que todo fuese exacto.
           </BodyText>
 
-          <SectionTitle>Fundamentos del Diseño Final</SectionTitle>
+          <SectionTitle>Principios del Diseño Final</SectionTitle>
           <BodyText>
-            La geometría definitiva del RX_NightBlade integra varios principios aerodinámicos
-            trabajados a lo largo del proceso iterativo. El morro adopta una forma cóncavo-convexa
-            que canaliza activamente el flujo hacia la parte superior e inferior de la carrocería,
-            maximizando la generación de carga descendente en el alerón delantero. Los pontones
-            laterales incorporan barreras verticales de separación de flujo que aíslan la zona
-            de baja presión central de la turbulencia generada por las ruedas, reduciendo la
-            resistencia parásita asociada al efecto Magnus. La zona trasera del vehículo finaliza
-            en un difusor de recompresión gradual que recupera la presión estática del flujo
-            y minimiza la estela, factor determinante del coeficiente de resistencia al avance.
+            El diseño final tiene varias cosas pensadas. El morro dirige el aire hacia arriba y
+            hacia abajo para aprovechar mejor el flujo. Los pontones
+            tienen paredes laterales que intentan mantener separado el flujo limpio central de la
+            turbulencia que crean las ruedas, lo que reduce la resistencia. La parte trasera termina
+            en una zona más progresiva para no cortar el aire de golpe y evitar una estela demasiado
+            desordenada.
           </BodyText>
-          <PlaceholderImage label="Vista lateral RX_NightBlade (CAD Fusion 360)" height="h-24" />
+
+          <div className="bg-cyan-950/40 border border-cyan-600/50 p-3 mb-3">
+            <div className="text-cyan-400 font-bold text-[10px] uppercase mb-2">Proceso de Diseño</div>
+            {[
+              { n: "01", t: "Forma base", d: "Perfil inicial de referencia impreso en 3D." },
+              { n: "02", t: "Iteración", d: "Ajuste de morro, pontones y difusor por criterios teóricos." },
+              { n: "03", t: "Validación CFD", d: "Simulación SimScale del diseño final." },
+              { n: "04", t: "Validación física", d: "Túnel de viento casero con hilos de flujo." },
+            ].map(({ n, t, d }) => (
+              <div key={n} className="flex gap-2 items-start mb-1">
+                <div className="bg-cyan-600 text-white font-black text-[10px] px-1.5 py-0.5 shrink-0">{n}</div>
+                <div>
+                  <div className="text-white font-bold text-[10px]">{t}</div>
+                  <div className="text-gray-400 text-[9px]">{d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <Photo src="/assets/cfd_grafica.png" alt="Gráfica de convergencia SimScale" label="cfd_grafica.png" height="h-36" fit="contain" />
         </div>
 
-        <div className="col-span-1">
-          <div className="bg-blue-700 text-white px-2 py-1 font-bold text-[10px] inline-block mb-3">VALIDACIÓN COMPUTACIONAL (SimScale CFD)</div>
-          <SectionTitle>Metodología y Configuración de la Simulación</SectionTitle>
+        {/* COL 2 — CFD SimScale */}
+        <div className="col-span-1 flex flex-col">
+          <div className="bg-blue-700 text-white px-2 py-1 font-bold text-[11px] inline-block mb-3">VALIDACIÓN COMPUTACIONAL (SimScale CFD)</div>
+          <SectionTitle>Configuración de la Simulación</SectionTitle>
           <BodyText>
-            Una vez finalizado el proceso iterativo de diseño físico, se procedió a la validación
-            computacional del diseño final mediante la plataforma SimScale, empleando un dominio
-            de simulación External Aerodynamics con el solver de volumen finito (FVM) incompresible.
-            El equipo aprendió a utilizar SimScale de forma autónoma en un período de una semana,
-            configurando el dominio de cálculo, la malla de elementos finitos y las condiciones
-            de contorno. La velocidad de entrada del fluido se estableció en <strong className="text-gold-400">20 m/s</strong>,
-            valor representativo de la velocidad punta estimada del RX_NightBlade en condiciones
-            de competición. La malla fue refinada localmente en las zonas de mayor interés
-            aerodinámico: morro, alerón delantero, pontones y difusor trasero.
+            Cuando tuvimos el diseño cerrado, lo simulamos en SimScale para ver si los números
+            cuadraban con lo que esperábamos. Configuramos una simulación de aerodinámica externa y
+            revisamos sobre todo las zonas que más nos interesaban: morro, pontones, alerón y parte
+            trasera. La simulación nos sirvió para comparar tendencias, no para vender un número como
+            si fuese una medición de pista.
           </BodyText>
 
-          <SectionTitle>Resultados y Análisis de Fuerzas</SectionTitle>
+          <SectionTitle>Resultados Obtenidos</SectionTitle>
           <BodyText>
-            La simulación convergió con residuos de velocidad y presión por debajo de 1×10⁻⁴,
-            asegurando la validez numérica de los resultados. Los valores de fuerza obtenidos
-            son altamente favorables y confirman la eficacia del proceso de diseño iterativo.
-            La fuerza en el eje Y (lateral) de tan solo <strong className="text-gold-400">0.05 N</strong>
-            demuestra la simetría casi perfecta del perfil, esencial para garantizar que el
-            vehículo avance en línea recta sin necesidad de corrección de trayectoria. La fuerza
-            en el eje Z de <strong className="text-cyan-400">-0.73 N</strong> confirma la generación
-            de downforce activo, que presiona el monoplaza contra la pista, incrementa la adherencia
-            y estabiliza el vehículo especialmente en la fase de máxima velocidad. La fuerza en
-            el eje X de <strong className="text-gold-400">0.00 N</strong> neto en la referencia
-            de análisis valida la excelente eficiencia de penetración del perfil diseñado.
+            En vez de quedarnos solo con cifras, miramos si el patrón general tenía sentido.
+            Lo importante fue que el flujo no parecía separarse de forma brusca en la parte
+            superior, que la estela salía bastante centrada y que no aparecía una asimetría
+            evidente entre izquierda y derecha. Eso nos dio confianza para seguir con esta
+            carrocería.
           </BodyText>
 
-          {/* CFD Data Highlight */}
-          <div className="bg-blue-950/60 border border-blue-500 p-3 my-2">
-            <div className="text-blue-300 font-bold text-[10px] uppercase mb-2">Resultados CFD — SimScale (v = 20 m/s)</div>
-            <div className="grid grid-cols-3 gap-2">
+          <div className="bg-blue-950/60 border border-blue-500 p-3 mb-3">
+            <div className="text-blue-300 font-bold text-[11px] uppercase mb-2">Lectura CFD — SimScale</div>
+            <div className="grid grid-cols-3 gap-2 mb-3">
               <div className="text-center">
-                <div className="text-white font-mono font-bold text-sm">0.05 N</div>
-                <div className="text-gray-400 text-[8px] uppercase">Eje Y (Lateral)</div>
+                <div className="text-white font-mono font-bold text-sm">baja</div>
+                <div className="text-gray-400 text-[9px] uppercase">Eje Y (Lateral)</div>
               </div>
               <div className="text-center border-x border-blue-500/40">
-                <div className="text-cyan-400 font-mono font-bold text-sm">-0.73 N</div>
-                <div className="text-gray-400 text-[8px] uppercase">Eje Z (Downforce)</div>
+                <div className="text-cyan-400 font-mono font-bold text-sm">estable</div>
+                <div className="text-gray-400 text-[9px] uppercase">Eje Z (Downforce)</div>
               </div>
               <div className="text-center">
-                <div className="text-gold-400 font-mono font-bold text-sm">0.00 N</div>
-                <div className="text-gray-400 text-[8px] uppercase">Eje X (Drag neto)</div>
+                <div className="text-gold-400 font-mono font-bold text-sm">controlado</div>
+                <div className="text-gray-400 text-[9px] uppercase">Estela</div>
               </div>
             </div>
+            <div className="border-t border-blue-500/30 pt-2 grid grid-cols-2 gap-1">
+              {[
+                ["Tipo", "Aerodinámica externa"],
+                ["Uso", "Comparar tendencias"],
+                ["Zonas revisadas", "Morro y pontones"],
+                ["Límite", "No sustituye pista"],
+              ].map(([k, v]) => (
+                <div key={k} className="text-[9px]">
+                  <span className="text-gray-500">{k}: </span>
+                  <span className="text-gray-300 font-mono">{v}</span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          <BodyText>
+            La conclusión no fue "el coche es perfecto", sino algo más útil: el diseño no mostraba
+            ningún problema enorme a primera vista. Para un equipo de instituto eso ya era una buena
+            señal, porque nos permitía pasar a fabricar y validar con pruebas físicas.
+          </BodyText>
+
+          <Photo src="/assets/cfd_lineas.png" alt="Líneas de flujo SimScale" label="cfd_lineas.png — Líneas de Corriente" height="h-36" fit="contain" />
         </div>
 
-        <div className="col-span-1">
-          <SectionTitle>Interpretación de los Datos CFD</SectionTitle>
+        {/* COL 3 — Túnel de viento */}
+        <div className="col-span-1 flex flex-col">
+          <div className="bg-cyan-700 text-white px-2 py-1 font-bold text-[11px] inline-block mb-3">VALIDACIÓN EXPERIMENTAL — TÚNEL DE VIENTO</div>
+          <SectionTitle>Construcción del Dispositivo</SectionTitle>
           <BodyText>
-            Los tres valores de fuerza obtenidos en SimScale permiten caracterizar de forma
-            completa el comportamiento aerodinámico del RX_NightBlade. La fuerza lateral (Y)
-            de 0.05 N es prácticamente nula e indica que el diseño es perfectamente simétrico
-            respecto al plano longitudinal del vehículo, lo que garantiza la ausencia de
-            momentos de guiñada inducidos aerodinámicamente que pudieran desviar la trayectoria.
-            El downforce (Z = -0.73 N) es el parámetro más relevante desde el punto de vista
-            del rendimiento en pista: esta fuerza negativa incrementa la carga normal sobre los
-            neumáticos, reduciendo la resistencia a la rodadura relativa y mejorando la estabilidad.
-            El hecho de que el equipo, sin haber utilizado CFD durante el diseño, haya llegado
-            a una geometría que genera downforce neto positivo demuestra la solidez del proceso
-            de ingeniería iterativa aplicado.
+            Como no tenemos acceso a un túnel de viento real, nos montamos uno casero. La base
+            es una cámara rectangular de cartón reforzado con una tapa de plástico transparente
+            para poder ver el interior sin molestar al flujo. Como generador de caudal usamos
+            un secador de pelo normal dirigido a la entrada. No es preciso, pero es suficiente
+            para ver si los hilos se vuelven locos o si el aire sigue una dirección razonable
+            alrededor de la carrocería.
           </BodyText>
 
-          <SectionTitle>Visualización del Flujo</SectionTitle>
-          <BodyText>
-            Las imágenes de post-procesado de SimScale muestran las líneas de corriente coloreadas
-            por velocidad del fluido. Se observa cómo el flujo libre de alta velocidad se
-            ve perturbado por la carrocería, acelerándose en las zonas de menor sección y
-            generando las zonas de baja presión que producen la carga aerodinámica descendente.
-            La ausencia de zonas de recirculación en la estela trasera confirma que el difusor
-            cumple su función de recompresión gradual.
-          </BodyText>
-          <img
-            src="/assets/cfd_lineas.png"
-            alt="Líneas de flujo SimScale"
-            className="w-full h-24 object-cover mb-2 border border-gray-700"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-          />
-          <PlaceholderImage label="cfd_lineas.png — Líneas de Corriente SimScale" height="h-24" />
+          <Photo src="/assets/tunel_viento.jpg" alt="Túnel de viento casero" label="tunel_viento.jpg" height="h-28" fit="cover" />
 
-          <img
-            src="/assets/cfd_grafica.png"
-            alt="Gráfica de convergencia SimScale"
-            className="w-full h-20 object-cover mb-2 border border-gray-700"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-          />
-          <PlaceholderImage label="cfd_grafica.png — Gráfica de Fuerzas" height="h-20" />
+          <SectionTitle>Hilos de Flujo e Interpretación</SectionTitle>
+          <BodyText>
+            Pegamos hilos muy finos con una gota de cianocrilato en puntos clave del coche:
+            morro, pontones y difusor trasero. Al encender el secador, los hilos se mueven con
+            el flujo y muestran hacia dónde va el aire en cada zona. Los hilos de la parte
+            superior se mantuvieron bastante ordenados, sin señales claras de separación fuerte.
+            En la parte trasera se veía más movimiento, que era esperable. No usamos esta prueba
+            para sacar números, solo para detectar si había una zona claramente mal diseñada.
+          </BodyText>
+
+          <Photo src="/assets/coche_hilos.jpg" alt="Coche con hilos para visualización del flujo" label="coche_hilos.jpg" height="h-28" fit="cover" />
+
+          <BodyText>
+            Evidentemente este ensayo no da datos cuantitativos: la velocidad no es uniforme
+            ni controlada, así que no puedes medir fuerzas. Pero sí te dice si hay algo muy
+            mal. En nuestro caso no vimos una separación exagerada del flujo, así que lo tomamos
+            como una validación cualitativa, nada más, pero útil.
+          </BodyText>
         </div>
 
       </div>
@@ -142,115 +178,196 @@ export const Page4: React.FC = () => {
 
 
 // =========================================================
-// PÁGINA 5: MANUFACTURA (MADCUP) Y CONTROL DE CALIDAD
+// PÁGINA 6: MANUFACTURA + ENSAYO ESTRUCTURAL
 // =========================================================
-export const Page5: React.FC = () => {
+export const Page6: React.FC = () => {
   return (
     <PageContainer>
-      <Header title="Manufactura Avanzada y Proceso de Fabricación" pageNumber={5} />
-      <div className="p-5 grid grid-cols-3 gap-5 h-full">
+      <Header title="Manufactura, Control de Calidad y Ensayo Estructural" pageNumber={6} />
+      <div className="p-5 grid grid-cols-3 gap-5 h-full items-stretch">
 
-        <div className="col-span-1">
-          <div className="bg-green-700 text-white px-2 py-1 font-bold text-[10px] inline-block mb-3">PROCESO DE FABRICACIÓN</div>
-          <SectionTitle>Delegación a MADCUP: Mecanizado CNC Profesional</SectionTitle>
+        {/* COL 1 — Fabricación */}
+        <div className="col-span-1 flex flex-col">
+          <div className="bg-green-700 text-white px-2 py-1 font-bold text-[11px] inline-block mb-3">PROCESO DE FABRICACIÓN</div>
+          <SectionTitle>Delegación a MADCUP</SectionTitle>
           <BodyText>
-            Dadas las limitaciones de acceso a maquinaria CNC de precisión a escala estudiantil
-            —ya que encontrar una empresa dispuesta a proporcionar tiempo de fresadora a un equipo
-            escolar presenta barreras logísticas considerables—, el equipo tomó la decisión
-            estratégica de delegar el mecanizado de la carrocería directamente a <strong className="text-gold-400">MADCUP</strong>,
-            la organización oficial de STEM Racing España. Esta decisión garantiza que el RX_NightBlade
-            sea mecanizado en condiciones industriales con los más altos estándares de calidad
-            y precisión dimensional, utilizando bloques de madera de densidad controlada y fresadoras
-            CNC de 4 ejes con tolerancias de producción de ±0.1 mm o superiores. El fichero CAD
-            final en formato STEP fue entregado a MADCUP tras superar la verificación de fabricabilidad
-            (DFM), asegurando la ausencia de geometrías con radios interiores inferiores al diámetro
-            de la fresa de acabado y sin socavados que impidan la extracción del bloque mecanizado.
+            No tenemos acceso a fresadoras CNC, así que mandamos el archivo a{' '}
+            <strong className="text-gold-400">MADCUP</strong>, que es la empresa que organiza
+            STEM Racing y ofrece el mecanizado de la carrocería para los equipos participantes.
+            El archivo que les enviamos estaba en formato STEP, que es el formato que nos pidieron
+            para poder preparar el mecanizado.
           </BodyText>
-          <SectionTitle>Preparación del Fichero para Fabricación (DFM)</SectionTitle>
+          <SectionTitle>Verificación DFM</SectionTitle>
           <BodyText>
-            Previamente a la entrega del fichero a MADCUP, el equipo realizó en Fusion 360 un
-            análisis exhaustivo de fabricabilidad del diseño. El análisis de radio mínimo verificó
-            que ninguna zona de la carrocería presentara radios interiores problemáticos para las
-            fresas disponibles. Asimismo, el análisis de accesibilidad detectó y eliminó zonas
-            con socavados en la primera revisión del diseño. El fichero final fue exportado
-            en formato STEP neutro, garantizando la interoperabilidad con el software CAM
-            que utilice MADCUP para la generación de trayectorias de herramienta.
+            Antes de enviar el archivo, lo revisamos en Fusion 360 para ver si había problemas
+            de fabricabilidad. Comprobamos que los radios interiores no fueran demasiado pequeños
+            para las fresas y que no hubiera socavados. En la primera revisión sí encontramos
+            alguna zona problemática y la corregimos. El archivo final lo exportamos en STEP,
+            que es el formato estándar para que el software CAM de MADCUP pueda generar las
+            trayectorias de mecanizado.
           </BodyText>
-        </div>
+          <div className="space-y-1.5 mb-3">
+            {[
+              { n: "01", t: "Diseño CAD", d: "Modelado 3D en Fusion 360 con FEA integrado." },
+              { n: "02", t: "Verificación DFM", d: "Radios mínimos, socavados y exportación STEP." },
+              { n: "03", t: "Mecanizado CNC", d: "Fabricación externa por MADCUP sobre bloque de madera." },
+              { n: "04", t: "Acabado superficial", d: "Lijado P360→P400, sellador PVA, pintura negra uniforme." },
+              { n: "05", t: "Ensamblaje", d: "Montaje con jig de alineación + epoxi de precisión." },
+              { n: "06", t: "Scrutineering", d: "Verificación dimensional con calibre Vernier." },
+            ].map(({ n, t, d }) => (
+              <div key={n} className="flex gap-2 items-start">
+                <div className="bg-gold-400 text-black font-black text-[10px] px-1.5 py-0.5 shrink-0">{n}</div>
+                <div>
+                  <div className="text-white font-bold text-[10px]">{t}</div>
+                  <div className="text-gray-400 text-[9px]">{d}</div>
+                </div>
+              </div>
+            ))}
+          </div>
 
-        <div className="col-span-1">
-          <SectionTitle>Impresión 3D: Prototipado Iterativo</SectionTitle>
-          <BodyText>
-            Durante todo el proceso de desarrollo previo al encargo del modelo definitivo a
-            MADCUP, el equipo fabricó sus propios prototipos mediante impresión 3D en tecnología
-            FDM (Fused Deposition Modeling) con filamento PLA+ y PETG. Esta capacidad de
-            prototipado rápido fue determinante para el éxito del proceso de diseño iterativo:
-            cada modificación geométrica del perfil aerodinámico podía ser evaluada físicamente
-            en el túnel de viento casero en un plazo de pocas horas tras el modelado en Fusion 360.
-            Los prototipos impresos también fueron los utilizados en los ensayos de carga estructural
-            del alerón y en las pruebas de rodadura en rampa, proporcionando datos de validación
-            valiosos antes de comprometer el material definitivo.
-          </BodyText>
-          <SectionTitle>Post-Procesado del Modelo Definitivo</SectionTitle>
-          <BodyText>
-            Una vez recibido el modelo mecanizado por MADCUP, el equipo procederá a un proceso
-            de acabado superficial estandarizado. El proceso incluye un lijado progresivo desde
-            grano 360 hasta grano 400, la aplicación de una capa de sellador PVA diluido en agua
-            (1:1) para consolidar la superficie de madera, y finalmente dos a tres manos de
-            pintura de acabado en aerosol para carrocería de automoción. Este tratamiento reduce
-            la rugosidad superficial Ra, contribuyendo a un flujo de capa límite más laminar
-            y a un menor coeficiente de arrastre viscoso en las zonas de bajo espesor.
-          </BodyText>
-          <PlaceholderImage label="Prototipo FDM en túnel de viento" height="h-20" />
-        </div>
-
-        <div className="col-span-1">
-          <div className="bg-red-700 text-white px-2 py-1 font-bold text-[10px] inline-block mb-3">CONTROL DE CALIDAD Y ESCRUTINIO</div>
-          <SectionTitle>Sistema de Verificación para el Escrutinio</SectionTitle>
-          <BodyText>
-            El escrutinio técnico (scrutineering) de STEM Racing es una inspección exhaustiva
-            realizada por el jurado de ingenieros antes de la carrera, en la que se verifica
-            que el monoplaza cumple estrictamente las especificaciones del reglamento técnico
-            en dimensiones, masa y seguridad. Para garantizar la superación de este proceso,
-            el equipo implementó un protocolo de verificación propio con listas de comprobación
-            (checklists) estandarizadas, adaptadas directamente de los criterios del reglamento
-            oficial de STEM Racing España. Cada dimensión externa es verificada con calibre
-            Vernier y comparada con los valores del modelo CAD.
-          </BodyText>
-          <SectionTitle>Ensamblaje y Alineación del Tren de Rodaje</SectionTitle>
-          <BodyText>
-            El ensamblaje del tren de rodaje —instalación de rodamientos cerámicos, ejes y
-            ruedas de PEEK— es la operación más sensible de todo el proceso de fabricación.
-            Se emplea un útil de alineación (jig) impreso en 3D que garantiza la perpendicularidad
-            de los ejes de las ruedas respecto al eje longitudinal del vehículo, eliminando
-            la resistencia de rodadura parásita causada por la convergencia o divergencia
-            de las ruedas. Antes de la aplicación del adhesivo epoxi de fijación definitivo,
-            se realiza siempre un montaje en seco para verificar el ajuste de todos los
-            componentes y detectar posibles interferencias.
-          </BodyText>
-          <SectionTitle>Estado de Fabricación Actual</SectionTitle>
-          <div className="bg-gold-900/30 border border-gold-400/50 p-2">
-            <div className="text-gold-400 font-bold text-[9px] uppercase mb-1">Estado del RX_NightBlade</div>
-            <div className="text-[8px] text-gray-300 leading-relaxed">
-              El fichero definitivo ha sido enviado a MADCUP para mecanizado CNC.
-              La masa total del vehículo será determinada y registrada en el momento
-              de la recepción del modelo mecanizado, previo al proceso de acabado
-              superficial y ensamblaje del tren de rodaje.
+          <div className="mt-auto bg-gold-900/30 border border-gold-400/50 p-3">
+            <div className="text-gold-400 font-bold text-[10px] uppercase mb-1">Estado Actual</div>
+            <div className="text-[9px] text-gray-300 leading-relaxed mb-2">
+              Fichero CAD enviado a MADCUP y carrocería ya recibida. El acabado final se dejó
+              en negro uniforme para mantener una superficie simple y sin elementos que generen
+              drag extra.
+            </div>
+            <div className="flex gap-2">
+              <div className="bg-green-900/50 border border-green-600 px-2 py-1 text-[9px] text-green-400 font-bold">Diseño: COMPLETADO</div>
+              <div className="bg-green-900/50 border border-green-600 px-2 py-1 text-[9px] text-green-400 font-bold">CNC: RECIBIDO</div>
             </div>
           </div>
-          <SectionTitle>Evaluación de Riesgos en el Puesto de Trabajo</SectionTitle>
+        </div>
+
+        {/* COL 2 — Control de calidad */}
+        <div className="col-span-1 flex flex-col">
+          <div className="bg-red-700 text-white px-2 py-1 font-bold text-[11px] inline-block mb-3">CONTROL DE CALIDAD Y ENSAMBLAJE</div>
+          <SectionTitle>Sistema de Verificación para el Scrutineering</SectionTitle>
+          <BodyText>
+            Antes de la carrera, el jurado revisa el coche para comprobar que cumple el
+            reglamento: dimensiones, masa, acabado... Para no tener sorpresas el día de la
+            competición nos hicimos nuestra propia lista de verificación sacada directamente
+            del reglamento oficial. Medimos cada dimensión exterior con calibre Vernier y
+            la comparamos con el modelo CAD.
+          </BodyText>
+
+          <SectionTitle>Ensamblaje y Alineación del Tren de Rodaje</SectionTitle>
+          <BodyText>
+            Lo más delicado del montaje es alinear bien las ruedas. Si quedan un poco torcidas,
+            la resistencia a la rodadura sube bastante. Para hacerlo bien imprimimos en 3D un
+            útil de alineación que mantiene las ruedas rectas respecto al coche.
+            Antes de pegar nada con epoxi hacemos siempre un montaje en seco para verificar que
+            todo encaja correctamente.
+          </BodyText>
+
           <Table
-            headers={["Riesgo", "Causa", "Control"]}
+            headers={["Componente", "Material", "Justificación"]}
             rows={[
-              ["Irritación ocular", "Polvo lijado", "Protección ocular"],
-              ["Narcosis", "Vapores pintura", "Ventilación"],
-              ["Corte", "Herramientas manuales", "Formación"],
+              ["Ruedas", "PLA", "Tapadas salvo alojamiento del rodamiento"],
+              ["Rodamientos", "Si₃N₄ (cerámico)", "Min. fricción rotacional"],
+              ["Carrocería", "Madera CNC", "Ligereza + mecanizabilidad"],
+              ["Acabado", "Pintura negra aerosol", "Uniforme, sin detalles que creen drag"],
             ]}
           />
+
+          <SectionTitle>Evaluación de Riesgos en el Puesto de Trabajo</SectionTitle>
+          <Table
+            headers={["Riesgo", "Causa", "Medida de Control"]}
+            rows={[
+              ["Irritación ocular", "Polvo de lijado", "Gafas de protección"],
+              ["Intoxicación", "Vapores de pintura", "Ventilación forzada"],
+              ["Corte", "Herramientas manuales", "Formación y EPI"],
+              ["Quemadura", "Cianocrilato exotérmico", "Guantes de nitrilo"],
+            ]}
+          />
+
+          <div className="mt-2">
+            <div className="text-[10px] text-gray-500 uppercase font-bold mb-2">Lista de Verificación Pre-Carrera</div>
+            {[
+              "Dimensiones exteriores dentro de reglamento",
+              "Masa total dentro del límite reglamentario",
+              "Rodamientos cerámicos correctamente instalados",
+              "Alineación de ruedas verificada con jig",
+              "Adhesivo epoxi curado (24h mínimo)",
+              "Acabado superficial: negro uniforme sin burbujas",
+              "Número de coche visible y fijo",
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-2 mb-1">
+                <div className="w-3 h-3 border border-gold-400/50 shrink-0" />
+                <span className="text-[9px] text-gray-400">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* COL 3 — Ensayo estructural alerón */}
+        <div className="col-span-1 flex flex-col">
+          <div className="bg-red-800 text-white px-2 py-1 font-bold text-[11px] inline-block mb-3">ENSAYO ESTRUCTURAL — ALERÓN DELANTERO</div>
+          <SectionTitle>Objetivo y Justificación del Ensayo</SectionTitle>
+          <BodyText>
+            El alerón es probablemente la pieza que más carga soporta: en el momento del disparo
+            del CO₂ recibe toda la inercia del coche, y si hay un golpe lateral con los carriles
+            de la pista es lo primero que impacta. Para saber cuánto aguantaba de verdad, más
+            allá de lo que decía el FEA, diseñamos un ensayo colgando el prototipo completo
+            impreso en 3D únicamente por los anclajes del alerón.
+          </BodyText>
+          <SectionTitle>Metodología</SectionTitle>
+          <BodyText>
+            Sujetamos el coche al tornillo de banco del laboratorio por los anclajes del alerón,
+            dejando el resto del chasis colgando. Fuimos añadiendo herramientas de taller encima,
+            cada una pesada antes para llevar cierto control del total. Fuimos subiendo la carga
+            poco a poco y paramos cuando ya nos parecía suficiente para el tipo de esfuerzo que
+            podía sufrir en carrera.
+          </BodyText>
+
+          <Table
+            headers={["Elemento de Carga", "Qué Comprobaba"]}
+            rows={[
+              ["Herramientas pequeñas", "Carga inicial"],
+              ["Alicates", "Carga intermedia"],
+              ["Llave inglesa", "Carga alta"],
+              ["Montaje completo", "Sin grieta visible"],
+            ]}
+          />
+
+          <div className="bg-black-900 border border-gray-700 p-3 mb-3">
+            <div className="text-gray-400 font-bold text-[10px] uppercase mb-1">Datos del Ensayo</div>
+            <div className="text-[10px] text-gray-300">
+              Carga aplicada de forma progresiva<br />
+              Ensayo hecho con el coche colgado por el alerón<br />
+              Observación principal: <strong className="text-green-400">sin grieta visible</strong><br />
+              Resultado usado como comprobación práctica, no como cálculo exacto
+            </div>
+          </div>
+
+          <SectionTitle>FEA vs. Ensayo Físico</SectionTitle>
+          <BodyText>
+            El FEA nos sirvió para localizar zonas delicadas, pero la prueba física fue la que
+            nos dio confianza real. Si el alerón aguantaba el peso del coche y varias cargas
+            añadidas sin marcarse ni agrietarse, el diseño tenía margen suficiente para seguir
+            con el montaje.
+          </BodyText>
+
+          <div className="flex-1 min-h-0 relative" style={{ minHeight: '80px' }}>
+            <img
+              src="/assets/aleron_pesos.jpg"
+              alt="Alerón soportando carga en el ensayo"
+              className="absolute inset-0 w-full h-full object-contain border border-gray-700 bg-black-900"
+              onError={(e) => {
+                const t = e.target as HTMLImageElement;
+                t.style.display = 'none';
+                const fb = t.parentElement?.querySelector('.fb-ph') as HTMLElement;
+                if (fb) fb.style.display = 'flex';
+              }}
+            />
+            <div className="fb-ph absolute inset-0 bg-black-700 border border-dashed border-gold-400/30 items-center justify-center" style={{ display: 'none' }}>
+              <span className="text-gold-400/50 text-[10px] font-mono uppercase text-center p-2">aleron_pesos.jpg</span>
+            </div>
+          </div>
         </div>
 
       </div>
-      <Footer pageNumber={5} />
+      <Footer pageNumber={6} />
     </PageContainer>
   );
 };
