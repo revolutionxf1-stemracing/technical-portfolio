@@ -175,19 +175,24 @@ export const Page3: React.FC = () => {
         </div>
 
         <div className="col-span-1 border-r border-gray-800 pr-4">
-          <SectionTitle>Rueda Final</SectionTitle>
+          <SectionTitle>Selección de Material para Ruedas</SectionTitle>
           <BodyText>
-            Para el coche final usamos ruedas de <strong className="text-gold-400">PLA</strong>.
-            Lo importante para nosotros era que fuesen rígidas, que girasen bien y que no
-            complicasen el montaje del rodamiento. Por eso dejamos la rueda prácticamente tapada:
-            solo queda abierta la zona donde entra el rodamiento cerámico.
+            Elegir el material de la rueda no es tan sencillo como parece. Necesitas que sea
+            rígido para que no se deforme bajo carga, ligero para reducir el momento de inercia,
+            y que no se rompa con los impactos. Comparamos tres opciones: Nylon 12 PA, PLA y
+            Accura 60. Nos quedamos con el PLA{' '}
+            <strong className="text-gold-400">PLA</strong> porque encajaba mejor con lo que
+            buscábamos: una rueda fácil de imprimir, rígida y con buen comportamiento para el rodaje.
+            No queríamos una pieza muy ligera si luego flexaba demasiado o era difícil de montar.
           </BodyText>
-          <BodyText>
-            Esta decisión también tenía sentido aerodinámico. Una rueda con radios o huecos puede
-            mover más aire alrededor del tren delantero y crear turbulencia extra. Al cerrar la
-            mayor parte de la superficie, la geometría queda más limpia y más fácil de integrar
-            con los pontones del coche.
-          </BodyText>
+          <Table
+            headers={["Material", "Ventaja", "Riesgo"]}
+            rows={[
+              ["Nylon 12 PA", "Ligero", "Menos rígido"],
+              ["PEEK", "Rígido y mecanizable", "Más exigente"],
+              ["Accura 60", "Buen acabado", "Más frágil"],
+            ]}
+          />
           <SectionTitle>Diseños de Rueda: FEA</SectionTitle>
           <BodyText>
             Probamos cuatro geometrías distintas con FEA en Fusion 360. Queríamos el menor

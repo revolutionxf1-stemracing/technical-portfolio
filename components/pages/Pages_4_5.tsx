@@ -255,7 +255,7 @@ export const Page6: React.FC = () => {
           <BodyText>
             Lo más delicado del montaje es alinear bien las ruedas. Si quedan un poco torcidas,
             la resistencia a la rodadura sube bastante. Para hacerlo bien imprimimos en 3D un
-            útil de alineación que mantiene las ruedas rectas respecto al coche.
+            útil de alineación que asegura que los ejes queden perpendiculares al eje del coche.
             Antes de pegar nada con epoxi hacemos siempre un montaje en seco para verificar que
             todo encaja correctamente.
           </BodyText>
@@ -265,6 +265,7 @@ export const Page6: React.FC = () => {
             rows={[
               ["Ruedas", "PLA", "Tapadas salvo alojamiento del rodamiento"],
               ["Rodamientos", "Si₃N₄ (cerámico)", "Min. fricción rotacional"],
+              ["Ejes", "Acero inox. A2", "Rigidez y tolerancia"],
               ["Carrocería", "Madera CNC", "Ligereza + mecanizabilidad"],
               ["Acabado", "Pintura negra aerosol", "Uniforme, sin detalles que creen drag"],
             ]}
