@@ -1,13 +1,18 @@
 import puppeteer from 'puppeteer';
 import { fileURLToPath } from 'url';
 import path from 'path';
+import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 (async () => {
     console.log('Launching browser...');
-    const browser = await puppeteer.launch();
+    const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+    const browser = await puppeteer.launch({
+        executablePath: fs.existsSync(chromePath) ? chromePath : undefined,
+        headless: true,
+    });
     const page = await browser.newPage();
     const appUrl = process.env.PORTFOLIO_URL || 'http://127.0.0.1:3000';
 
@@ -76,7 +81,7 @@ const __dirname = path.dirname(__filename);
 
     console.log('Generating PDF...');
     await page.pdf({
-        path: path.join(__dirname, '../business-portfolio.pdf'),
+        path: path.join(__dirname, '../portfolio.pdf'),
         format: 'A3',
         landscape: true,
         preferCSSPageSize: true,
@@ -86,5 +91,5 @@ const __dirname = path.dirname(__filename);
     });
 
     await browser.close();
-    console.log('PDF generated successfully: business-portfolio.pdf');
+    console.log('PDF generated successfully: portfolio.pdf');
 })();
