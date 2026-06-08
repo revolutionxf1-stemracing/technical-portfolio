@@ -1,0 +1,11 @@
+{
+  "test": "fiabilidad_rodamientos_basico",
+  "samples": 180,
+  "shape_k": 2.801742963809543,
+  "scale_lambda": 129.12484626296094,
+  "b10_s": 57.834015335468855,
+  "b50_s": 113.29144939682473,
+  "mission_reliability_110s": 0.5282471483846606,
+  "mean_spin_time_s": 113.91544975491864,
+  "mensaje_portfolio": "Aplicamos fiabilidad Weibull para justificar preparacion de rodamientos."
+}

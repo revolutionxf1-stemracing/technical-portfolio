@@ -1,0 +1,40 @@
+{
+  "analysis": "tolerance_stackup_montecarlo",
+  "runs": 18000,
+  "pass_rate": 0.9289444444444445,
+  "ppm_defects": 71055.55555555553,
+  "mean_violations_per_part": 0.07905555555555556,
+  "top_drivers": [
+    {
+      "factor": "wheel_radius_mm",
+      "base_pass_rate": 0.9289444444444445,
+      "pass_rate_if_fixed": 0.9798333333333333,
+      "delta_pass_rate": 0.05088888888888887
+    },
+    {
+      "factor": "body_mass_g",
+      "base_pass_rate": 0.9289444444444445,
+      "pass_rate_if_fixed": 0.943,
+      "delta_pass_rate": 0.014055555555555488
+    },
+    {
+      "factor": "rear_track_mm",
+      "base_pass_rate": 0.9289444444444445,
+      "pass_rate_if_fixed": 0.9308333333333333,
+      "delta_pass_rate": 0.0018888888888888289
+    },
+    {
+      "factor": "front_track_mm",
+      "base_pass_rate": 0.9289444444444445,
+      "pass_rate_if_fixed": 0.9307777777777778,
+      "delta_pass_rate": 0.0018333333333333535
+    },
+    {
+      "factor": "axle_parallelism_mm",
+      "base_pass_rate": 0.9289444444444445,
+      "pass_rate_if_fixed": 0.9306111111111111,
+      "delta_pass_rate": 0.0016666666666665941
+    }
+  ],
+  "portfolio_message": "Demonstrates process capability and quantifies which dimensions most affect compliance risk."
+}

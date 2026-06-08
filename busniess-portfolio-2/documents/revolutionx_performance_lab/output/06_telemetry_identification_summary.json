@@ -1,0 +1,18 @@
+{
+  "analysis": "telemetry_system_identification",
+  "input_mode": "synthetic_reference",
+  "samples": 1201,
+  "estimated_coefficients": {
+    "k0_roll_term": 0.17657331200165374,
+    "k1_aero_term": 0.01640613848364231,
+    "crr": 0.018005466902729653,
+    "cda_m2": 0.0014218653352490002
+  },
+  "estimated_thrust_curve": {
+    "A": 15.798400281186554,
+    "tau_s": 0.18,
+    "offset_c": 0.14036838862959874,
+    "formula": "F(t) = c + A*exp(-t/tau)"
+  },
+  "portfolio_message": "Closes loop between telemetry and simulation with identified physical parameters."
+}

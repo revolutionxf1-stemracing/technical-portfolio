@@ -1,0 +1,12 @@
+{
+  "test": "simulador_carrera_calibrado",
+  "equipo": "STEM Racing - RevolutionX",
+  "referencia_mundial_s": 1.087,
+  "numero_simulaciones": 2500,
+  "tiempo_medio_s": 1.1164,
+  "tiempo_p50_s": 1.1085,
+  "tiempo_p5_s": 0.949,
+  "tiempo_p95_s": 1.3135,
+  "velocidad_max_media_kmh": 75.4,
+  "tasa_exito": 1.0
+}

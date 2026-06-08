@@ -1,0 +1,75 @@
+{
+  "test": "optimizacion_aero_stem_racing",
+  "disenos_evaluados": 86400,
+  "disenos_pareto": 30,
+  "mejor_diseno": {
+    "longitud_mm": 245,
+    "anchura_mm": 55,
+    "radio_morro": 0.2,
+    "conicidad": 0.7,
+    "angulo_aleron": 0,
+    "altura_mm": 25,
+    "cd": 0.2296,
+    "area_m2": 0.001375,
+    "cda_m2": 0.000316,
+    "estabilidad": 0.6,
+    "fabricabilidad": 0.7,
+    "score": 0.33433
+  },
+  "parametros_busqueda": {
+    "longitudes_mm": [
+      185,
+      205,
+      225,
+      245,
+      265
+    ],
+    "anchuras_mm": [
+      55,
+      65,
+      75,
+      85
+    ],
+    "radios_morro": [
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5
+    ],
+    "conicidades": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9
+    ],
+    "angulos_aleron": [
+      -3,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "alturas_mm": [
+      25,
+      30,
+      35,
+      40,
+      45,
+      50
+    ]
+  }
+}

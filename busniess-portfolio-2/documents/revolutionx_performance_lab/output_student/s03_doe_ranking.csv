@@ -1,0 +1,5 @@
+factor,efecto_s,efecto_abs,ic95_bajo,ic95_alto,recomendacion
+diametro_rueda,-0.019656,0.019656,-0.030584,-0.008699,ALTO (+1)
+masa_coche,0.016304,0.016304,0.003826,0.028761,BAJO (-1)
+precarga_rodamiento,0.012291,0.012291,-0.000671,0.025023,BAJO (-1)
+alineacion_ruedas,-0.000611,0.000611,-0.014344,0.014897,ALTO (+1)

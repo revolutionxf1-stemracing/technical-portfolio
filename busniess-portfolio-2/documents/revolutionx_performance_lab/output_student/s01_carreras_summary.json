@@ -1,0 +1,9 @@
+{
+  "test": "simulador_carrera_basico",
+  "runs": 2500,
+  "mean_time_s": 0.5653324000000004,
+  "p50_time_s": 0.5640000000000004,
+  "p95_time_s": 0.6180500000000007,
+  "success_rate": 1.0,
+  "mensaje_portfolio": "Demostramos rendimiento y robustez con incertidumbre realista."
+}

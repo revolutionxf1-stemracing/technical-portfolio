@@ -1,0 +1,25 @@
+{
+  "optimizer": "NSGA-II",
+  "population": 110,
+  "generations": 70,
+  "seed": 2026,
+  "pareto_size": 110,
+  "pareto_kpis": {
+    "drag_p10": 0.20868017692785745,
+    "drag_p50": 0.21386140575831497,
+    "drag_p90": 0.2177774483150499
+  },
+  "champion_design": {
+    "nose_radius_ratio": 0.10006579930780313,
+    "sidepod_taper": 0.9999153948885559,
+    "wing_attack_deg": 0.4816725784303874,
+    "wheel_shroud_ratio": 0.999944023623651,
+    "splitline_robustness": 0.9936795739048185,
+    "objectives": {
+      "drag": 0.2084441550145235,
+      "stability": 0.12021987867000179,
+      "manufacturability": 0.12349017056378331
+    }
+  },
+  "portfolio_message": "Pareto front proves the team can optimize conflicting engineering objectives."
+}

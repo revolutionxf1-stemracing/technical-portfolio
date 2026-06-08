@@ -1,0 +1,7 @@
+{
+  "test": "tolerancias_basico",
+  "num_parts": 12000,
+  "pass_rate": 0.99225,
+  "ppm_defects": 7750.000000000035,
+  "mensaje_portfolio": "Cuantificamos capacidad de proceso y riesgo de no conformidad."
+}

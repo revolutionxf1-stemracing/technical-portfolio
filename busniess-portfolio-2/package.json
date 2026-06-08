@@ -1,5 +1,5 @@
 {
-  "name": "revolutionx-business-portfolio",
+  "name": "hydron-portfolio-black-&-gold",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,11 +10,9 @@
     "pdf": "node scripts/generate-pdf.js"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.3.0",
     "puppeteer": "^24.36.0",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "tailwindcss": "^4.3.0"
+    "react-dom": "^19.2.3"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

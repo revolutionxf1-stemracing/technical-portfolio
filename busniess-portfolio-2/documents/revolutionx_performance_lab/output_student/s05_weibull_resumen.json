@@ -1,0 +1,9 @@
+{
+  "test": "fiabilidad_rodamientos",
+  "muestras": 180,
+  "k": 2.8017,
+  "lambda": 129.12,
+  "b10_s": 57.83,
+  "b50_s": 113.29,
+  "fiabilidad_mision": 0.5282
+}

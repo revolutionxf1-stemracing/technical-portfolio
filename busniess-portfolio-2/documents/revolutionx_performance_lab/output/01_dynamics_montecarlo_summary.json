@@ -1,0 +1,31 @@
+{
+  "simulation": "vehicle_dynamics_montecarlo",
+  "runs": 5000,
+  "seed": 2026,
+  "nominal_setup": {
+    "track_length_m": 20.0,
+    "rho_air": 1.2,
+    "g": 9.80665,
+    "dt": 0.0007,
+    "t_max": 3.0,
+    "mass_kg": 0.052,
+    "wheel_radius_m": 0.0135,
+    "wheel_inertia_kgm2": 1.9e-07,
+    "cda_m2": 0.00145,
+    "crr": 0.018,
+    "thrust_f0_n": 18.0,
+    "thrust_tau_s": 0.11,
+    "residual_thrust_n": 2.0,
+    "launch_loss_ratio": 0.06,
+    "yaw_drag_gain": 0.012
+  },
+  "kpis": {
+    "mean_finish_time_s": 0.6089077399999991,
+    "std_finish_time_s": 0.036085781005968105,
+    "p05_time_s": 0.5529649999999965,
+    "p50_time_s": 0.6075999999999991,
+    "p95_time_s": 0.6713000000000022,
+    "success_rate": 1.0
+  },
+  "engineering_takeaway": "Optimize the highest-sensitivity variables first to reduce both average time and variance."
+}

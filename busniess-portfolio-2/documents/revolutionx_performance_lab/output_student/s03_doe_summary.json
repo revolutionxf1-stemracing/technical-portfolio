@@ -1,0 +1,13 @@
+{
+  "test": "doe_basico",
+  "num_runs": 16,
+  "top_factor": {
+    "factor": "diametro_rueda",
+    "effect_s": -0.019658361308890093,
+    "abs_effect_s": 0.019658361308890093,
+    "ci95_low": -0.03058660066568748,
+    "ci95_high": -0.00870255563848829,
+    "recomendacion": "HIGH"
+  },
+  "mensaje_portfolio": "Priorizamos mejoras con estadistica y no solo por intuicion."
+}

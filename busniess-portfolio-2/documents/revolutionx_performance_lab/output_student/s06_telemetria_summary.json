@@ -1,0 +1,9 @@
+{
+  "test": "telemetria_basica",
+  "samples": 1151,
+  "k0": 0.17651969999999997,
+  "k1": 0.016384615384615386,
+  "crr": 0.018,
+  "cda_m2": 0.00142,
+  "mensaje_portfolio": "Cerramos el ciclo modelo-pista identificando parametros fisicos."
+}

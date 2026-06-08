@@ -1,0 +1,27 @@
+{
+  "analysis": "bearing_reliability_weibull",
+  "samples": 220,
+  "shape_k": 3.2682682163254224,
+  "scale_lambda": 127.95171681323285,
+  "shape_k_ci95": [
+    2.9842377473054356,
+    3.635344943032373
+  ],
+  "scale_lambda_ci95": [
+    122.12175325805927,
+    132.92724575993049
+  ],
+  "b10_life_s": 64.27061952988706,
+  "b10_ci95": [
+    58.605748673729735,
+    70.68509458203053
+  ],
+  "b50_life_s": 114.37815727899161,
+  "b50_ci95": [
+    108.96504260520024,
+    119.6996637060025
+  ],
+  "mission_time_s": 110.0,
+  "mission_reliability": 0.543276731608288,
+  "portfolio_message": "Quantifies reliability margins and validates bearing prep process statistically."
+}

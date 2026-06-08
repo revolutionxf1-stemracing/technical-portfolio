@@ -1,0 +1,6 @@
+{
+  "test": "tolerancias_basico",
+  "piezas": 12000,
+  "tasa_ok": 0.9922,
+  "ppm_defectos": 7750.0
+}

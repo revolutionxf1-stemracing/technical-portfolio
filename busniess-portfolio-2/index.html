@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RevolutionX Portfolio Tecnico 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              300: '#E6C86B',
+              400: '#D4AF37',
+              500: '#C5A028',
+              600: '#B08D20'
+            },
+            black: {
+              950: '#050505',
+              900: '#000000',
+              800: '#111111',
+              700: '#1a1a1a'
+            }
+          },
+          fontFamily: {
+            sans: ['Manrope', 'sans-serif'],
+            display: ['Rajdhani', 'sans-serif'],
+            mono: ['IBM Plex Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;700;800&family=Rajdhani:wght@500;600;700&display=swap');
+
+    :root {
+      --bg-primary: #050505;
+      --bg-secondary: #111111;
+      --bg-tertiary: #1a1a1a;
+      --gold-primary: #D4AF37;
+      --gold-soft: #E6C86B;
+      --text-primary: #f3f3f3;
+      --text-secondary: #b3b3b3;
+      --line-soft: rgba(212, 175, 55, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(212, 175, 55, 0.12), transparent 60%),
+        radial-gradient(900px 500px at 95% 110%, rgba(212, 175, 55, 0.08), transparent 60%),
+        linear-gradient(180deg, var(--bg-secondary), var(--bg-primary));
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    /* A3 Aspect Ratio for display */
+    .a3-page {
+      aspect-ratio: 420 / 297;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+      border-radius: 12px;
+    }
+
+    .page-ambient-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, rgba(212, 175, 55, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(212, 175, 55, 0.035) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse at center, black 50%, transparent 100%);
+      opacity: 0.7;
+    }
+
+    .page-noise {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 0.6px, transparent 0.6px);
+      background-size: 3px 3px;
+      opacity: 0.12;
+      mix-blend-mode: soft-light;
+    }
+
+    .reveal-fade {
+      animation: revealFade 0.9s ease both;
+    }
+
+    .reveal-rise {
+      animation: revealRise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes revealFade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes revealRise {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .a3-page {
+        border-radius: 10px;
+      }
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #111;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #D4AF37;
+      border-radius: 4px;
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
+  }
+}
+</script>
+
+</head>
+
+<body class="bg-black-900 text-gray-200">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

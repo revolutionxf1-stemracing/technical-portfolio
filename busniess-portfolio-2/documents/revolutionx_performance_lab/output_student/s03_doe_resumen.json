@@ -1,0 +1,13 @@
+{
+  "test": "doe_basico",
+  "equipo": "STEM Racing",
+  "experimentos": 16,
+  "top_factor": {
+    "factor": "diametro_rueda",
+    "efecto_s": -0.019656,
+    "efecto_abs": 0.019656,
+    "ic95_bajo": -0.030584,
+    "ic95_alto": -0.008699,
+    "recomendacion": "ALTO (+1)"
+  }
+}

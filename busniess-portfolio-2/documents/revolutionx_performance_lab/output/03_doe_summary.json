@@ -1,0 +1,75 @@
+{
+  "analysis": "DOE factor screening",
+  "mode": "synthetic_demo",
+  "runs": 64,
+  "top_5_effects": [
+    {
+      "term": "wheel_diameter_mm",
+      "effect_s": -0.016518706308466413,
+      "abs_effect_s": 0.016518706308466413,
+      "ci95_low_s": -0.023458056106453674,
+      "ci95_high_s": -0.00974356816210933
+    },
+    {
+      "term": "guide_clearance_mm",
+      "effect_s": 0.013577686378562603,
+      "abs_effect_s": 0.013577686378562603,
+      "ci95_low_s": 0.00670890492964758,
+      "ci95_high_s": 0.020264742851404366
+    },
+    {
+      "term": "body_mass_g",
+      "effect_s": 0.012812772553894014,
+      "abs_effect_s": 0.012812772553894014,
+      "ci95_low_s": 0.005767306934430627,
+      "ci95_high_s": 0.019650563202641205
+    },
+    {
+      "term": "wheel_diameter_mm*rear_balance_pct",
+      "effect_s": -0.01003369047959235,
+      "abs_effect_s": 0.01003369047959235,
+      "ci95_low_s": -0.01718434070642309,
+      "ci95_high_s": -0.0033049994210931966
+    },
+    {
+      "term": "bearing_preload_n",
+      "effect_s": 0.009715222749449026,
+      "abs_effect_s": 0.009715222749449026,
+      "ci95_low_s": 0.002127888462177224,
+      "ci95_high_s": 0.01701262565670099
+    }
+  ],
+  "recommended_settings": [
+    {
+      "factor": "wheel_diameter_mm",
+      "recommended_level": "HIGH",
+      "reason": "HIGH reduces time"
+    },
+    {
+      "factor": "bearing_preload_n",
+      "recommended_level": "LOW",
+      "reason": "LOW reduces time"
+    },
+    {
+      "factor": "body_mass_g",
+      "recommended_level": "LOW",
+      "reason": "LOW reduces time"
+    },
+    {
+      "factor": "rear_balance_pct",
+      "recommended_level": "HIGH",
+      "reason": "HIGH reduces time"
+    },
+    {
+      "factor": "guide_clearance_mm",
+      "recommended_level": "LOW",
+      "reason": "LOW reduces time"
+    },
+    {
+      "factor": "launch_alignment_deg",
+      "recommended_level": "LOW",
+      "reason": "LOW reduces time"
+    }
+  ],
+  "portfolio_message": "Shows statistically defensible factor prioritization with uncertainty bounds."
+}

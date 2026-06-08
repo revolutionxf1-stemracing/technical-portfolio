@@ -1,0 +1,15 @@
+{
+  "test": "optimizacion_aero_simple",
+  "num_disenos": 150,
+  "pareto_size": 1,
+  "mejor_diseno": {
+    "nose_radius_ratio": 0.09,
+    "sidepod_taper": 0.9,
+    "wing_attack_deg": 0,
+    "drag_obj": 0.22883,
+    "stability_obj": 0.122,
+    "manufacturing_obj": 0.1,
+    "score": 0.18279800000000002
+  },
+  "mensaje_portfolio": "Demostramos gestion de trade-offs entre drag, estabilidad y fabricacion."
+}

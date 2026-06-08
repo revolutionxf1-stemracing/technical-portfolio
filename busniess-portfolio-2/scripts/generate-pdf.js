@@ -9,12 +9,12 @@ const __dirname = path.dirname(__filename);
     console.log('Launching browser...');
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    const appUrl = process.env.PORTFOLIO_URL || 'http://127.0.0.1:3000';
 
     console.log('Navigating to app...');
-    await page.setViewport({ width: 1800, height: 1272, deviceScaleFactor: 2 });
-    await page.emulateMediaType('print');
-    await page.goto(appUrl, { waitUntil: 'networkidle0' });
+    // Assumes the app is running on localhost:3000
+    // Set viewport to A3 at 300 DPI approx width (preset helps with layout)
+    await page.setViewport({ width: 3508, height: 2480, deviceScaleFactor: 2 });
+    await page.goto('http://localhost:3000', { waitUntil: 'networkidle0' });
 
     console.log('Waiting for images to load...');
     await page.evaluate(async () => {
@@ -35,41 +35,39 @@ const __dirname = path.dirname(__filename);
                 size: A3 landscape;
                 margin: 0;
             }
-            html, body, #root, .portfolio-shell {
-                margin: 0 !important;
-                padding: 0 !important;
-                background: #000 !important;
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #000; /* Ensure bg is black */
+                -webkit-print-color-adjust: exact;
             }
-            * {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+            #root {
+                width: 100%;
+            }
+            #root > div {
+                padding: 0 !important;
+                gap: 0 !important;
+            }
+            #root > div > div {
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: hidden !important;
+                height: 100vh !important;
+                break-inside: avoid !important;
+                break-after: always !important;
+                page-break-inside: avoid !important;
+                page-break-after: always !important;
+            }
+            #root > div > :last-child {
+                display: none !important;
             }
             .a3-page {
-                break-inside: avoid;
-                break-after: always;
-                page-break-inside: avoid;
-                page-break-after: always;
                 margin: 0 !important;
                 box-shadow: none !important;
                 border: none !important;
-                border-radius: 0 !important;
-                width: 420mm !important;
-                min-height: 297mm !important;
-                height: 297mm !important;
+                width: 100vw !important;
+                height: 100vh !important;
                 max-width: none !important;
-                background: #050505 !important;
-            }
-            .a3-page:last-of-type {
-                break-after: auto !important;
-                page-break-after: auto !important;
-            }
-            .no-print {
-                display: none;
-            }
-            .portfolio-shell {
-                display: block !important;
-                gap: 0 !important;
-                background: #000 !important;
             }
         `
     });
@@ -79,9 +77,7 @@ const __dirname = path.dirname(__filename);
         path: path.join(__dirname, '../portfolio.pdf'),
         format: 'A3',
         landscape: true,
-        preferCSSPageSize: true,
         printBackground: true,
-        omitBackground: false,
         margin: { top: 0, right: 0, bottom: 0, left: 0 }
     });
 

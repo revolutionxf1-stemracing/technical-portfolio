@@ -50,8 +50,8 @@ const Page: React.FC<{ title: string; page: number; ghost?: string; children: Re
 
 const Cover: React.FC = () => (
   <section className="a3-page relative bg-black text-white overflow-hidden shadow-[0_30px_90px_rgba(0,0,0,0.45)] mb-10 border border-gold-400/15 rounded-[10px]">
-    <img src="/assets/render_coche.png" alt="RX NightBlade" className="absolute inset-0 w-full h-full object-cover opacity-30" />
-    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/20" />
+    <img src="/assets/render_coche.png" alt="RX NightBlade" className="absolute inset-0 w-full h-full object-cover opacity-70" />
+    <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
     <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at center, #D4AF37 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
     <div className="relative z-10 h-full flex flex-col justify-between p-12">
       <div className="max-w-[950px]">
@@ -332,10 +332,10 @@ const Page2: React.FC = () => (
             headers={['Expenditure Area', 'Amount', '% of spend']}
             columns="1.2fr 0.7fr 0.7fr"
             rows={[
-              ['Pit display', '—', '—'],
-              ['CNC car manufacturing', '—', '—'],
-              ['Materials & components', '—', '—'],
-              ['Other (transport, printing)', '—', '—'],
+              ['Pit display', '423€', '41%'],
+              ['CNC car manufacturing', '250€', '24%'],
+              ['Materials & components', '220€', '21%'],
+              ['Other (printing, events)', '140€', '14%'],
               ['Total expenditure', '1,033€', '100%'],
             ]}
           />
@@ -359,37 +359,27 @@ const Page2: React.FC = () => (
             headers={['Resource Category', 'Management Decision']}
             columns="1fr 1.6fr"
             rows={[
-              ['Pit Display', '—'],
-              ['CNC Manufacturing', '—'],
-              ['Sponsors', '—'],
-              ['Crowdfunding', '—'],
+              ['Pit Display', '4 canvas panels + posters ordered early; time buffer built in for printing errors'],
+              ['CNC Manufacturing', '3D-printed backup design prepared in case of milling failure'],
+              ['Sponsors', '5 monetary sponsors (625€) + 3 material sponsors secured via 3-step outreach process'],
+              ['Crowdfunding', 'GoFundMe campaign raised 625€ from 14 donations on GoFundMe platform'],
             ]}
           />
         </Block>
-        <Block title="Schedule Variance Analysis">
-          <T>Schedule variance compares predicted and actual task timeframes. Positive variance means ahead of schedule, negative means behind.</T>
-          <Table
-            headers={['Deliverable', 'Baseline End', 'Actual End', 'Variance']}
-            columns="1.1fr 0.7fr 0.7fr 0.8fr"
-            rows={[
-              ['Engineering portfolio', '—', '—', '—'],
-              ['Enterprise portfolio', '—', '—', '—'],
-              ['Car manufacturing', '—', '—', '—'],
-              ['Sponsorship prospectus', '—', '—', '—'],
-              ['Uniforms', '—', '—', '—'],
-              ['Pit display', '—', '—', '—'],
-            ]}
-          />
+        <Block title="Schedule Management">
+          <T>RevolutionX tracked its schedule using a Gantt chart updated roughly every month to ensure consistent organisation. The chart was the single source of truth for start dates, end dates, and task durations across all deliverables.</T>
+          <T>Two submission milestones structured the timeline: a first submission in April 2026 covering the Engineering Portfolio, car, sponsorship prospectus, and uniforms; and a second submission in June 2026 covering the Enterprise Portfolio and pit display. Both milestones were met on time, with no significant delays reported across the season.</T>
+          <T>The main scheduling risk — missing task deadlines due to limited school working time (~1 hour/day) — was mitigated by building a time buffer into every deliverable and prioritising tasks monthly using ClickUp.</T>
         </Block>
         <Block title="Cost & Revenue Variance">
           <Table
             headers={['Metric', 'Predicted', 'Actual', 'Variance']}
             columns="0.9fr 0.7fr 0.7fr 0.8fr"
             rows={[
-              ['Expenditure', '~1,000€', '1,033€', '—'],
-              ['Sponsor revenue', '—', '625€', '—'],
-              ['Crowdfunding', '—', '625€', '—'],
-              ['Net surplus', '—', '—', '—'],
+              ['Expenditure', '~1,000€', '1,033€', '+33€ (+3.3%)'],
+              ['Sponsor revenue', '~1,000€', '625€', '-375€'],
+              ['Crowdfunding', '0€', '625€', '+625€'],
+              ['Net surplus', '0€', '217€', '+217€'],
             ]}
           />
         </Block>
@@ -576,17 +566,6 @@ const Page4: React.FC = () => (
             ]}
           />
         </Block>
-        <Block title="Marketing Risks">
-          <Table
-            headers={['Risk', 'Identified Issue', 'Solution']}
-            columns="0.8fr 1.25fr 1.4fr"
-            rows={[
-              ['Sponsors', 'Not enough sponsors for the competition', 'Turn to closer, more accessible sponsors to ensure a strong brand identity'],
-              ['Brand Awareness', 'Not promoting brand enough to be recognised', 'Highlight logo on pit display, get in newspapers, attend STEM Racing events (Cupra City Garage, etc.)'],
-              ['Budget', 'Not enough funding for the project', 'Maintain organisational budget tracking with available and required funds'],
-            ]}
-          />
-        </Block>
       </div>
     </div>
   </Page>
@@ -626,11 +605,14 @@ const Page5: React.FC = () => (
     <div className="grid grid-cols-3 gap-5 h-full">
       {/* col 1 */}
       <div className="flex flex-col">
-        <Block title="Pit Display Risks">
+        <Block title="Risks">
           <Table
             headers={['Risk', 'Identified Issue', 'Solution']}
             columns="0.85fr 1.25fr 1.4fr"
             rows={[
+              ['Sponsors', 'Not enough sponsors for the competition', 'Turn to closer, more accessible sponsors to ensure a strong brand identity'],
+              ['Brand Awareness', 'Not promoting brand enough to be recognised', 'Highlight logo on pit display, get in newspapers, attend STEM Racing events (Cupra City Garage, etc.)'],
+              ['Budget', 'Not enough funding for the project', 'Maintain organisational budget tracking with available and required funds'],
               ['Element Deadlines', 'Not having all pit display elements ready on time', 'Order elements as early as possible and build a time buffer in case of printing errors'],
               ['Poster Resolution', 'Printed posters having low resolution', 'Consult the printing company for feedback and adjust files if any issues appear'],
             ]}
@@ -642,16 +624,16 @@ const Page5: React.FC = () => (
             headers={['Risk', 'Resources', 'Schedule', 'Scope', 'Quality', 'Deliverables']}
             columns="0.85fr 0.5fr 0.5fr 0.45fr 0.45fr 0.85fr"
             rows={[
-              ['Car protection', '—', '—', '—', '—', '—'],
-              ['Car production', '—', '—', '—', '—', '—'],
-              ['Car weight', '—', '—', '—', '—', '—'],
-              ['Sticker dims', '—', '—', '—', '—', '—'],
-              ['Simulations', '—', '—', '—', '—', '—'],
-              ['Sponsors', '—', '—', '—', '—', '—'],
-              ['Brand awareness', '—', '—', '—', '—', '—'],
-              ['Budget', '—', '—', '—', '—', '—'],
-              ['Element deadlines', '—', '—', '—', '—', '—'],
-              ['Poster resolution', '—', '—', '—', '—', '—'],
+              ['Car protection', '●', '●', '—', '●', 'Car'],
+              ['Car production', '●', '●', '—', '●', 'Car'],
+              ['Car weight', '●', '—', '●', '●', 'Car'],
+              ['Sticker dims', '—', '●', '—', '●', 'Car livery'],
+              ['Simulations', '—', '●', '●', '●', 'Eng. Portfolio'],
+              ['Sponsors', '●', '—', '—', '—', 'Budget'],
+              ['Brand awareness', '—', '—', '●', '●', 'Pit display'],
+              ['Budget', '●', '●', '●', '—', 'All deliverables'],
+              ['Element deadlines', '—', '●', '—', '●', 'Pit display'],
+              ['Poster resolution', '—', '●', '—', '●', 'Posters'],
             ]}
           />
           <Tiny>Fill in ● for concerned areas of impact.</Tiny>
@@ -667,9 +649,9 @@ const Page5: React.FC = () => (
             headers={['Level', 'Count', 'Strategy', 'Example']}
             columns="0.45fr 0.4fr 0.95fr 1.4fr"
             rows={[
-              ['High', '—', 'Mitigate + Avoid', '—'],
-              ['Medium', '—', 'Avoid OR Mitigate', '—'],
-              ['Low', '—', 'Single response', '—'],
+              ['High', '2', 'Mitigate + Avoid', 'Car production: 3D backup ready'],
+              ['Medium', '4', 'Avoid OR Mitigate', 'Budget: crowdfunding campaign'],
+              ['Low', '4', 'Single response', 'Poster resolution: consult print company'],
             ]}
           />
         </Block>
@@ -679,12 +661,12 @@ const Page5: React.FC = () => (
             headers={['Section', 'Content', 'Purpose']}
             columns="0.7fr 1.3fr 1fr"
             rows={[
-              ['Abstract', '—', '—'],
-              ['Resources', '—', '—'],
-              ['Schedule', '—', '—'],
-              ['Scope creep', '—', '—'],
-              ['Task sign-offs', '—', '—'],
-              ['Concerns', '—', '—'],
+              ['Abstract', 'General month summary and key team achievements', 'High-level view for coordinators'],
+              ['Resources', 'Budget consumed vs available; sponsor/crowdfunding updates', 'Ensure funds are on track'],
+              ['Schedule', 'Completed vs planned tasks based on Gantt', 'Detect delays early'],
+              ['Scope creep', 'Activities identified outside the original scope statement', 'Prevent uncontrolled expansion'],
+              ['Task sign-offs', 'Tasks formally approved by department coordinator', 'Ensure quality gate is met'],
+              ['Concerns', 'Issues or blockers requiring next-month attention', 'Proactive risk management'],
             ]}
           />
         </Block>
@@ -692,7 +674,7 @@ const Page5: React.FC = () => (
           <T>Scope creep is the uncontrolled expansion of project scope. RevolutionX identified it by auditing team member activities on a monthly basis against the scope statement.</T>
           <VBox title="Scope Creep Action Plan">
             <div className="space-y-1">
-              {[['1. Detect', '—'], ['2. Assess', '—'], ['3. Decide', '—'], ['4. Control', '—']].map(([s, d]) => (
+              {[['1. Detect', 'Identify activities not included in original scope statement via monthly audit'], ['2. Assess', 'Evaluate impact on timeline, budget, and quality of deliverables'], ['3. Decide', 'Accept into scope (amend WBS) or eliminate the out-of-scope activity'], ['4. Control', 'Document the decision and update WBS and Gantt accordingly']].map(([s, d]) => (
                 <div key={s} className="grid grid-cols-[65px_1fr] gap-1.5 border border-gold-400/20 bg-black/60 p-1">
                   <div className="text-gold-400 font-black text-[8.5px]">{s}</div>
                   <div className="text-gray-300 text-[8.5px] leading-tight">{d}</div>
@@ -710,12 +692,12 @@ const Page5: React.FC = () => (
             headers={['Artifact', 'Purpose', 'Frequency', 'Owner']}
             columns="0.9fr 1.3fr 0.6fr 0.8fr"
             rows={[
-              ['Status report', '—', '—', '—'],
-              ['Budget tracking', '—', '—', '—'],
-              ['Schedule updates', '—', '—', '—'],
-              ['Risk register', '—', '—', '—'],
-              ['Issue log', '—', '—', '—'],
-              ['Scope audit', '—', '—', '—'],
+              ['Status report', 'Monthly project health review', 'Monthly', 'Saúl (Coord.)'],
+              ['Budget tracking', 'Actual vs estimated spend', 'Weekly', 'Saúl'],
+              ['Schedule updates', 'Gantt revision & milestone tracking', 'Monthly', 'Saúl / Martín'],
+              ['Risk register', 'Identify and monitor active risks', 'Monthly', 'Coordinators'],
+              ['Issue log', 'Track and resolve active issues', 'Ongoing', 'Coordinators'],
+              ['Scope audit', 'Review activities vs scope statement', 'Monthly', 'Coordinators'],
             ]}
           />
         </Block>
@@ -724,10 +706,10 @@ const Page5: React.FC = () => (
             headers={['Issue', 'Status', 'Resolution']}
             columns="1.1fr 0.5fr 1.5fr"
             rows={[
-              ['—', '—', '—'],
-              ['—', '—', '—'],
-              ['—', '—', '—'],
-              ['—', '—', '—'],
+              ['Car weight too heavy at regionals', 'Resolved', 'Purchased lower-density bearings'],
+              ['Insufficient initial funding from sponsors', 'Resolved', 'GoFundMe campaign raised 625€'],
+              ['Incorrect sticker dimensions on car', 'Resolved', 'Verified in Fusion 360 with multiple sketches'],
+              ['Simulations delayed vs portfolio deadline', 'Resolved', 'Prioritised over secondary tasks'],
             ]}
           />
         </Block>
@@ -739,7 +721,7 @@ const Page5: React.FC = () => (
             ))}
           </div>
         </Block>
-        <StatGrid stats={[['Report cycle', '—'], ['Risk areas', '—'], ['Active issues', '—'], ['Source lesson', '—']]} />
+        <StatGrid stats={[['Report cycle', 'Monthly'], ['Risk areas', '3'], ['Active issues', '0'], ['Source lesson', 'Regional competition']]} />
       </div>
     </div>
   </Page>
@@ -778,11 +760,11 @@ const Page6: React.FC = () => (
             headers={['Deliverable', 'Logo Use', 'Colour Scheme']}
             columns="0.85fr 1.2fr 1fr"
             rows={[
-              ['Car livery', '—', '—'],
-              ['Uniforms', '—', '—'],
-              ['Portfolios', '—', '—'],
-              ['Pit display', '—', '—'],
-              ['Social media', '—', '—'],
+              ['Car livery', 'Gold gradient logo on car surface', 'Black/gold throughout'],
+              ['Uniforms', 'Logo (front) + sponsor logos (back)', 'Black polo with gold shoulder stripes'],
+              ['Portfolios', 'Logo on cover, gold section headers', 'Gold accents on black/dark background'],
+              ['Pit display', 'Full-size logo on 4 canvas panels', 'Dominant black/gold branding'],
+              ['Social media', 'Logo as profile picture on Instagram', 'Consistent black/gold visual tone'],
             ]}
           />
         </Block>
@@ -879,10 +861,10 @@ const Page7: React.FC = () => (
           <VBox title="Adapted Marketing Funnel">
             <div className="space-y-1.5">
               {[
-                ['Awareness', '—', 'w-full'],
-                ['Consideration', '—', 'w-[80%]'],
-                ['Follow', '—', 'w-[60%]'],
-                ['Deep Involvement', '—', 'w-[38%]'],
+                ['Awareness', 'Instagram posts, press articles, school events, Mayor visit', 'w-full'],
+                ['Consideration', 'Website, sponsorship prospectus, direct outreach via email/DMs', 'w-[80%]'],
+                ['Follow', 'Instagram account — 206 followers, 28 posts', 'w-[60%]'],
+                ['Deep Involvement', 'Sponsors, Nova Alliance members (4 countries), school collaborators', 'w-[38%]'],
               ].map(([s, d, w]) => (
                 <div key={s}>
                   <div className="flex items-center gap-2 mb-0.5">
@@ -905,9 +887,10 @@ const Page7: React.FC = () => (
         <Block title="Taking Action — Instagram" tag="Primary Digital Channel">
           <T>Goals: 1, 2, 4 & 3 (in order of importance). Target audience: 2, 3, 1 & 4.</T>
           <T>Instagram is the social media platform RevolutionX uses to share posts promoting our team and our sponsors. We also use it as a communication channel to reach out to companies and send them our sponsorship proposal. Furthermore, thanks to this platform, we successfully established our international alliance, which we discuss later on.</T>
+          <T><strong className="text-gold-400">Last 90 days:</strong> 22,927 views · 2,896 accounts reached · 1,262 interactions · 235 followers · 595 profile visits.</T>
           <VBox title="Instagram Content Model">
             <div className="grid grid-cols-3 gap-2">
-              {['—', '—', '—', '—', '—', '—'].map((item, idx) => (
+              {['Team & achievements', 'Sponsor features', 'Competition updates', 'Nova Alliance', 'Press coverage', 'Events & outreach'].map((item, idx) => (
                 <div key={idx} className="h-14 border border-gold-400/25 bg-black flex items-center justify-center text-center text-[8.5px] text-gray-300 px-1">{item}</div>
               ))}
             </div>
@@ -930,10 +913,10 @@ const Page7: React.FC = () => (
             headers={['Channel', 'Goal Priority', 'Target Priority', 'Content Type']}
             columns="0.7fr 0.7fr 0.7fr 1.2fr"
             rows={[
-              ['Instagram', '1, 2, 4, 3', '2, 3, 1, 4', '—'],
-              ['Website', '1, 2, 4', '2, 1, 3, 4', '—'],
-              ['Nova Alliance', '3, 2, 1', '4, 2, 1', '—'],
-              ['Press/Media', '1, 2', '2, 1, 4, 3', '—'],
+              ['Instagram', '1, 2, 4, 3', '2, 3, 1, 4', 'Posts, stories, reels; DMs for sponsorship outreach'],
+              ['Website', '1, 2, 4', '2, 1, 3, 4', 'Team info, technical data, sponsor visibility'],
+              ['Nova Alliance', '3, 2, 1', '4, 2, 1', 'Cross-team comms via Instagram and Telegram'],
+              ['Press/Media', '1, 2', '2, 1, 4, 3', 'Journalist-written articles in 6+ media outlets'],
             ]}
           />
         </Block>
@@ -965,20 +948,20 @@ const Page7: React.FC = () => (
             headers={['Channel', 'Budget', 'Strategy']}
             columns="1fr 0.6fr 1.4fr"
             rows={[
-              ['Instagram ads', '—', '—'],
-              ['Printing', '—', '—'],
-              ['Collaborations', '—', '—'],
-              ['Events', '—', '—'],
-              ['Total marketing', '—', '—'],
+              ['Instagram ads', '0€', 'Organic only — no paid ads'],
+              ['Printing', 'Incl. in pit display (423€)', 'Posters printed via main budget'],
+              ['Collaborations', '0€', 'Nova Alliance — no cost, mutual benefit'],
+              ['Events', '0€', 'School-organised; Mayor visit self-arranged'],
+              ['Total marketing', '0€ dedicated', 'All covered within main 1,033€ budget'],
             ]}
           />
         </Block>
         <Block title="Strategy Summary">
           <List items={[
-            '—',
-            '—',
-            '—',
-            '—',
+            'Instagram organic growth: 206 followers, 28 posts, international alliance reach',
+            'Press outreach: featured in EL MUNDO, El Español, RNE, InfoMajadahonda and more',
+            'Nova Alliance: international collaboration across 4 countries (Spain, Mexico, Wales, Vietnam, China)',
+            'Events: school Open House + Mayor of Majadahonda visit generated institutional sponsorship',
           ]} />
         </Block>
       </div>
@@ -1042,10 +1025,10 @@ const Page8: React.FC = () => (
           <VBox title="From Outreach to Resources">
             <div className="space-y-1.5">
               {[
-                ['Outreach', '—'],
-                ['Coverage', '—'],
-                ['Credibility', '—'],
-                ['Resources', '—'],
+                ['Outreach', 'Contacted 7+ media outlets and the Mayor of Majadahonda via email and in-person presentation'],
+                ['Coverage', 'Featured in EL MUNDO, El Español, RNE, InfoMajadahonda, Noroeste Madrid, Majadahonda Magazine'],
+                ['Credibility', 'Mayor Lola Moreno visited the school; STEM Racing Spain Director Cristina Benzal attended'],
+                ['Resources', 'Ayuntamiento de Majadahonda became a material sponsor (1 roll-up + institutional support)'],
               ].map(([step, detail]) => (
                 <div key={step} className="grid grid-cols-[80px_1fr] gap-2 border border-gold-400/20 bg-black/60 p-2">
                   <div className="text-gold-400 font-black uppercase text-[9px]">{step}</div>
@@ -1093,12 +1076,22 @@ const Page9: React.FC = () => (
           <T><strong className="text-gold-400">2. Nurturing Relationships:</strong> The second step focused on building relationships with these potential sponsors. In these conversations, we discussed our project, outlined the resources we needed, and so on. Once a company confirmed a sponsorship agreement with us, we moved to the final step.</T>
           <T><strong className="text-gold-400">3. Sponsorship Confirmation:</strong> The final step was the confirmation of the sponsorship. At this stage, we officially and publicly announced our partnership agreement with the respective company.</T>
         </Block>
-        <VBox title="Sponsor Acquisition Funnel">
-          <div className="space-y-1.5">
-            {[['Companies contacted', '—', 'w-full'], ['Responded positively', '—', 'w-[60%]'], ['Entered negotiation', '—', 'w-[30%]'], ['Confirmed sponsors', '8', 'w-[16%]']].map(([l, c, w]) => (
-              <div key={l}>
-                <div className="flex justify-between text-[9px] text-gray-400 mb-0.5"><span>{l}</span><span>{c}</span></div>
-                <div className="h-3 bg-white/10"><div className={`h-full bg-gold-400 ${w}`} /></div>
+        <VBox title="Confirmed Sponsors">
+          <div className="space-y-1">
+            {[
+              ['Pañalón', '250€', 'Monetary + material (uniforms)'],
+              ['Lorena Solutions', '140€', 'Monetary (wind tunnel)'],
+              ['Moñita', '100€', 'Monetary'],
+              ['Titanes', '85€', 'Monetary (t-shirt stamping)'],
+              ['El Postrecito de Isabel', '50€', 'Monetary'],
+              ['Black & White', 'In-kind', '10 uniforms + 2 roll-ups'],
+              ['Ayto. Majadahonda', 'In-kind', '1 roll-up'],
+              ['GoFundMe', '625€', 'Crowdfunding — 14 donations'],
+            ].map(([name, amount, type]) => (
+              <div key={name} className="grid grid-cols-[1fr_0.45fr_1.1fr] gap-1 border border-gold-400/20 bg-black/60 px-1.5 py-1">
+                <div className="text-gold-400 font-black text-[8px]">{name}</div>
+                <div className="text-white font-black text-[8px]">{amount}</div>
+                <div className="text-gray-400 text-[7.5px] leading-tight">{type}</div>
               </div>
             ))}
           </div>
@@ -1117,12 +1110,12 @@ const Page9: React.FC = () => (
             headers={['Visibility Channel', 'Sponsor Logo Placement', 'Audience Reach']}
             columns="0.85fr 1.2fr 0.95fr"
             rows={[
-              ['Uniforms', '—', '—'],
-              ['Car livery', '—', '—'],
-              ['Pit display', '—', '—'],
-              ['Roll-ups', '—', '—'],
-              ['Social media', '—', '—'],
-              ['Press articles', '—', '—'],
+              ['Uniforms', 'Back of each of the 10 polo shirts', 'Competition attendees, judges, media'],
+              ['Car livery', 'Stickers on the car surface', 'Competition track audience & judges'],
+              ['Pit display', '4 canvas panels + frontal poster', 'All competition visitors at pit area'],
+              ['Roll-ups', '3 roll-ups (Black & White + Ayto.)', 'Event & competition audiences'],
+              ['Social media', 'Featured in Instagram posts', '206+ followers, international reach'],
+              ['Press articles', 'Mentioned in 6+ media articles', 'General public — EL MUNDO, RNE, etc.'],
             ]}
           />
         </Block>
@@ -1179,9 +1172,9 @@ const Page10: React.FC = () => (
         </VBox>
         <Block title="Sustainability Strategy">
           <List items={[
-            <><strong className="text-gold-400">Avoid:</strong> —</>,
-            <><strong className="text-gold-400">Reuse:</strong> —</>,
-            <><strong className="text-gold-400">Dispose:</strong> —</>,
+            <><strong className="text-gold-400">Avoid:</strong> Minimize use of non-biodegradable plastics — switch to PLA in 3D printing for test cars and keychains</>,
+            <><strong className="text-gold-400">Reuse:</strong> Team members' personal 3D printers made available to the team, reducing need for new equipment</>,
+            <><strong className="text-gold-400">Dispose:</strong> ~1,000 batteries collected and delivered to the local punto limpio for safe regulated processing</>,
           ]} />
         </Block>
         <Block title="Environmental Impact Assessment">
@@ -1189,12 +1182,9 @@ const Page10: React.FC = () => (
             headers={['Aspect', 'Environmental Impact', 'RevolutionX Response']}
             columns="0.8fr 1.2fr 1.3fr"
             rows={[
-              ['3D printing', '—', '—'],
-              ['Manufacturing', '—', '—'],
-              ['Transport', '—', '—'],
-              ['Batteries', '—', '—'],
-              ['Printing', '—', '—'],
-              ['Packaging', '—', '—'],
+              ['3D printing', 'Microplastic generation from non-biodegradable plastic', 'Switched to biodegradable PLA filament throughout'],
+              ['Batteries', 'Heavy metal contamination of soil and water', 'Collected ~1,000 batteries; delivered to punto limpio'],
+              ['Plastic waste', 'Only 8% of plastics globally are recycled (Penn State, 2024)', 'PLA used: biodegradable and compostable — zero lasting footprint'],
             ]}
           />
         </Block>
@@ -1228,13 +1218,13 @@ const Page10: React.FC = () => (
             headers={['Dimension', 'Goal', 'Action Taken', 'Status']}
             columns="0.7fr 0.9fr 1.4fr 0.45fr"
             rows={[
-              ['Environmental', '—', '—', '—'],
-              ['Environmental', '—', '—', '—'],
-              ['Environmental', '—', '—', '—'],
-              ['Social', '—', '—', '—'],
-              ['Social', '—', '—', '—'],
-              ['Economic', '—', '—', '—'],
-              ['Economic', '—', '—', '—'],
+              ['Environmental', 'Reduce microplastic pollution', 'Switched all 3D printing to biodegradable PLA', '✓'],
+              ['Environmental', 'Prevent heavy metal contamination', 'Battery collection campaign at IES José Saramago', '✓'],
+              ['Environmental', 'Minimise plastic waste in project', 'PLA is compostable — no lasting environmental footprint', '✓'],
+              ['Social', 'Raise awareness at school', 'Battery campaign collected ~1,000 units from students', '✓'],
+              ['Social', 'Promote STEM education', 'Open House, press articles, and Mayor visit', '✓'],
+              ['Economic', 'Manage project within budget', 'Spent 1,033€ vs 1,000€ estimate (+3.3% variance)', '✓'],
+              ['Economic', 'Diversify funding sources', 'Sponsors (625€) + GoFundMe crowdfunding (625€)', '✓'],
             ]}
           />
         </Block>

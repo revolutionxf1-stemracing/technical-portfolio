@@ -1,0 +1,8 @@
+{
+  "test": "telemetria_basica",
+  "muestras": 1151,
+  "crr": 0.018,
+  "cda_m2": 0.00142,
+  "k0": 0.1765,
+  "k1": 0.01638
+}
